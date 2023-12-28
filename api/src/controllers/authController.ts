@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
-import { COOKIE_NAME, jwtToken } from '../consts';
+import { COOKIE_NAME, jwtToken } from '../../consts';
 import { DataBase, User } from '../types';
 import { insert, selectBy } from '../db/queries';
 

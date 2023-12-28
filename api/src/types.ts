@@ -19,3 +19,6 @@ export type Todo = {
 }
 
 export type SelectType = 'single' | 'plural'
+
+export type SeparatedObject = Record<string, string[]>
+export type SeparateToValuesAndKeys = string[][]

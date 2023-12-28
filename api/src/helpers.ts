@@ -1,5 +1,7 @@
-export const separateObject = (obj: object): { values: string[], keys: string[] } => {
-  const initial = { values: [], keys: [] };
+import { SeparatedObject, SeparateToValuesAndKeys } from "./types";
+
+export const separateObject = (obj: object): SeparatedObject => {
+  const initial: SeparatedObject = { values: [], keys: [] };
 
   return Object.entries(obj).reduce((a, c) => {
     const [key, value] = c;
@@ -10,9 +12,9 @@ export const separateObject = (obj: object): { values: string[], keys: string[] 
   }, initial);
 };
 
-export const separateToValuesAndKeys = (data: Record<string, string>, keys: string[]): [string[], string[], string[]] => {
+export const separateToValuesAndKeys = (data: Record<string, string>, keys: string[]): SeparateToValuesAndKeys => {
   return Object.entries(data).reduce((a, c) => { //Tuple
-    const [nv, kv, kn] = a;
+    const [nv, kv, kn]: SeparateToValuesAndKeys = a;
     if (keys.includes(c[0])) { kv.push(c[1]) };
     if (!keys.includes(c[0])) {
       nv.push(c[1]);

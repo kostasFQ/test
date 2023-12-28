@@ -3,7 +3,7 @@ import cookieParser from 'cookie-parser';
 import todosRoutes from './src/routes/todos';
 import authRoutes from './src/routes/auth';
 import appPaths from './src/paths';
-import { port } from './src/consts';
+import { port } from './consts';
 
 
 const app = express();

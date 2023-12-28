@@ -1,15 +1,16 @@
 import { Request, Response } from 'express';
 import jwt, { JwtPayload } from 'jsonwebtoken';
-import { COOKIE_NAME, jwtToken } from '../consts';
 import { selectBy, insert, update, remove } from '../db/queries';
 import { DataBase, Todo } from '../types';
+import { COOKIE_NAME, jwtToken } from '../../consts';
 
 export const getTodos = (req: Request, res: Response) => {
   try {
     const token = req.cookies[COOKIE_NAME];
     if (!token) return res.status(401).json('Not authenthicated');
 
-    const { id: userId } = jwt.verify(token, jwtToken) as JwtPayload;
+    const { id } = jwt.verify(token, jwtToken) as JwtPayload;
+    const userId = id.toString();
     const todos: Todo[] = selectBy(DataBase.TODOS, { userId });
     res.json(todos);
   } catch (err: unknown) {
@@ -54,7 +55,8 @@ export const deleteTodo = (req: Request, res: Response) => {
     const token = req.cookies[COOKIE_NAME];
     if (!token) return res.status(401).json('Not authenthicated');
 
-    const { id: userId } = jwt.verify(token, jwtToken) as JwtPayload;
+    const { id } = jwt.verify(token, jwtToken) as JwtPayload;
+    const userId = id.toString();
     const todo: Todo = selectBy(DataBase.TODOS, { id: req.params.id, userId }, 'single');
 
     if (!todo) return res.status(404).json('Todo not found');
