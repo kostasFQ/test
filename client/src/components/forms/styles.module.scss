@@ -1,0 +1,19 @@
+.todoForm {
+
+  h3 {
+    text-transform: uppercase;
+  }
+
+  .addTodoControls {
+    display: flex;
+  }
+
+  .mainInput {
+    width: 100%;
+  }
+
+  .mainButton {
+    height: auto;
+    padding: 0 2rem;
+  }
+}

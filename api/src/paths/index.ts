@@ -4,7 +4,7 @@ const appPaths = {
   auth: {
     root: `${prefix}/users`,
     register: '/register',
-    login: '/login',
+    login: `/login`,
     logout: '/logout'
   },
   todos: {

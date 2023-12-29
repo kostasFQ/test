@@ -10,10 +10,16 @@ export type User = {
   id?: number
 }
 
+export type DBTodo = {
+  id: number;
+  title: string;
+  isDone: string;
+  userId: number;
+}
+
 export type Todo = {
   id: number;
   title: string;
-  description: string;
   isDone: boolean;
   userId: number;
 }

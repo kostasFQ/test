@@ -1,4 +1,4 @@
-import { SeparatedObject, SeparateToValuesAndKeys } from "./types";
+import { DBTodo, SeparatedObject, SeparateToValuesAndKeys, Todo } from "./types";
 
 export const separateObject = (obj: object): SeparatedObject => {
   const initial: SeparatedObject = { values: [], keys: [] };
@@ -6,7 +6,7 @@ export const separateObject = (obj: object): SeparatedObject => {
   return Object.entries(obj).reduce((a, c) => {
     const [key, value] = c;
     a.keys.push(key);
-    a.values.push(value);
+    a.values.push(value.toString());
 
     return a;
   }, initial);
@@ -24,3 +24,8 @@ export const separateToValuesAndKeys = (data: Record<string, string>, keys: stri
     return a;
   }, [[], [], []]);
 };
+
+export const parseTodo = (todo: DBTodo): Todo => {
+  const boolenValue = todo.isDone === 'true' ? true : false;
+  return { ...todo, isDone: boolenValue };
+}

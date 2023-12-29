@@ -7,10 +7,11 @@ export function selectBy<T>(tableName: DataBase, data?: Record<string, string>, 
   const { keys, values } = separateObject(data);
   const query = keys.map((i) => `${i} = ?`).join(' AND ');
 
-  return (type === 'single'
+  const res = (type === 'single'
     ? db.prepare(`SELECT * FROM ${tableName} WHERE ${query}`).get(values)
     : db.prepare(`SELECT * FROM ${tableName} WHERE ${query}`).all(values)
   ) as T;
+  return res;
 };
 
 export function insert(tableName: DataBase, data: Record<string, string>) {

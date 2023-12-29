@@ -36,8 +36,8 @@ export const login = (req: Request, res: Response) => {
 
     if (!isMatch) return res.status(400).json("Wrong user name or password");
 
-    const token = jwt.sign({ id: user.id }, jwtToken);
-    res.cookie(COOKIE_NAME, token, { httpOnly: true }).status(200).json(rest);
+    const token = jwt.sign({ id: existingUser.id }, jwtToken);
+    res.cookie(COOKIE_NAME, token, { httpOnly: true, sameSite: 'none', secure: true }).status(200).json(rest);
   } catch (err: unknown) {
     res.status(500).json('Smtn went wrong...');
   }

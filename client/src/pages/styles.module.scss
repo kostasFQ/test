@@ -1,0 +1,27 @@
+.authPage {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100dvh;
+}
+
+.listPage {
+  display: flex;
+  justify-content: center;
+
+  .listPageLayout {
+    width: 70%;
+
+    .error {
+      color: red;
+    }
+  }
+}
+
+.notFoundPage {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100dvh;
+}
