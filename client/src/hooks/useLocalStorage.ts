@@ -3,7 +3,7 @@ export const useLocalStorage = () => {
   const getStorageValue = (key: string) => {
     const data = localStorage.getItem(key);
     return data ? JSON.parse(data) : undefined;
-  }
+  };
   const deleteStorageValue = (key: string) => localStorage.removeItem(key);
   const clearStorage = () => localStorage.clear();
 

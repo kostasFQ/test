@@ -37,7 +37,7 @@ function App() {
         </Route>
         <Route path={appPaths.register} element={<Register />} />
         <Route path={appPaths.login} element={<Login />} />
-        <Route path="*" element={<NotFound />} />
+        <Route path='*' element={<NotFound />} />
       </Routes>
     </BrowserRouter>
   );

@@ -3,7 +3,7 @@ import cookieParser from 'cookie-parser';
 import todosRoutes from './src/routes/todos';
 import authRoutes from './src/routes/auth';
 import appPaths from './src/paths';
-import { port } from './consts';
+import { clientDomain, port } from './consts';
 import cors from 'cors';
 
 const app = express();
@@ -11,7 +11,7 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(cors({
   credentials: true,
-  origin: "http://localhost:3000",
+  origin: clientDomain,
 }))
 
 app.use(appPaths.auth.root, authRoutes);

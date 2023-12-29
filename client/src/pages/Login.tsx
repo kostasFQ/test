@@ -5,7 +5,7 @@ import apiRoutes from "paths/api";
 import appPaths from "paths/app";
 import { useCallback, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { User } from "types";
+import { LoginUserData, User } from "types";
 import { useLocalStorage } from "hooks/useLocalStorage";
 import { USER_STORAGE_KEY } from "consts";
 import { useUserContext } from "storage/userContext";
@@ -20,23 +20,23 @@ function Login() {
   const { setStorageValue } = useLocalStorage();
   const navigate = useNavigate();
 
-  const onSubmit = useCallback(async (formJsonData: Partial<User>) => {
+  const onSubmit = useCallback(async (body: LoginUserData) => {
     try {
-      const user = await post<Partial<User>, User>(apiRoutes.users.login, formJsonData);
+      const user = await post<LoginUserData, User>(apiRoutes.users.login, body);
       setUser(user);
       setStorageValue(USER_STORAGE_KEY, user);
       navigate(appPaths.root);
-    } catch (e: unknown) {
-      if (e instanceof AxiosError) {
-        setError(e.response?.data)
+    } catch (err) {
+      if (err instanceof AxiosError) {
+        setError(err.response?.data)
       }
     }
   }, [navigate, post, setStorageValue, setUser]);
 
   return (
     <div className={styles.authPage}>
-      <AuthForm viewType="login" onSubmit={onSubmit} error={error} />
-      <AuthRedirect goToHref={appPaths.register} goToTitle="Registration" label="New User?" />
+      <AuthForm viewType='login' onSubmit={onSubmit} error={error} />
+      <AuthRedirect goToHref={appPaths.register} goToTitle='Registration' label='New User?' />
     </div>
   )
 }

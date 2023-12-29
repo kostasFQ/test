@@ -1,30 +1,21 @@
-export enum DataBase {
-  USERS = 'users',
-  TODOS = 'todos'
-};
+export type ID = number | bigint;
 
-export type User = {
-  username: string;
+export type LoginUserData = {
   password: string;
   email: string;
-  id?: number
 }
+export type NewUser = LoginUserData & { username: string }
+export type User = NewUser & { id: ID }
 
-export type DBTodo = {
-  id: number;
+export type BaseTodo = {
+  id: ID;
   title: string;
-  isDone: string;
-  userId: number;
+  userId: ID;
 }
+export type DBTodo = BaseTodo & { isDone: string }
+export type Todo = BaseTodo & { isDone: boolean }
 
-export type Todo = {
-  id: number;
-  title: string;
-  isDone: boolean;
-  userId: number;
+export type ErrorType = {
+  statusCode: number,
+  message: string
 }
-
-export type SelectType = 'single' | 'plural'
-
-export type SeparatedObject = Record<string, string[]>
-export type SeparateToValuesAndKeys = string[][]

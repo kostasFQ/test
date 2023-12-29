@@ -4,8 +4,8 @@ import appPaths from "../paths";
 
 const router = express.Router();
 
-router.post(appPaths.auth.register, register);
-router.post(appPaths.auth.login, login);
-router.get(appPaths.auth.logout, logout);
+router.post(appPaths.auth.sub.register, register);
+router.post(appPaths.auth.sub.login, login);
+router.get(appPaths.auth.sub.logout, logout);
 
 export default router;

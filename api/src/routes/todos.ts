@@ -4,9 +4,9 @@ import appPaths from "../paths";
 
 const router = express.Router();
 
-router.get(appPaths.todos.get, getTodos);
-router.post(appPaths.todos.post, addTodo);
-router.put(appPaths.todos.put, updateTodo);
-router.delete(appPaths.todos.delete, deleteTodo);
+router.get(appPaths.todos.sub.get, getTodos);
+router.post(appPaths.todos.sub.post, addTodo);
+router.put(appPaths.todos.sub.put, updateTodo);
+router.delete(appPaths.todos.sub.delete, deleteTodo);
 
 export default router;

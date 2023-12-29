@@ -2,50 +2,51 @@ import { Request, Response } from 'express';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import { COOKIE_NAME, jwtToken } from '../../consts';
-import { DataBase, User } from '../types';
-import { insert, selectBy } from '../db/queries';
+import { LoginUserData, NewUser } from '../types';
+import { addNewUser, getUser } from '../db/userQueries';
+import { errorHandler } from '../helpers';
 
 export const register = (req: Request, res: Response) => {
   try {
-    const user = req.body as User;
-    const { email, password, username } = user;
-    const existingUser: User = selectBy(DataBase.USERS, { email }, 'single');
-
+    const { email, password, username } = req.body as NewUser;
+    const existingUser = getUser(email);
     if (existingUser) return res.status(409).json('User exists');
 
-    const salt = bcrypt.genSaltSync(10);
-    const hash = bcrypt.hashSync(password, salt);
-    const id = insert(DataBase.USERS, { email, username, password: hash });
+    const hash = bcrypt.hashSync(password, bcrypt.genSaltSync(10));
+    const newUser = addNewUser({ email, username, password: hash });
 
-    res.status(201).json({ ...req.body, id });
-  } catch (err: unknown) {
-    res.status(500).json('Smtn went wrong...');
+    res.status(201).json(newUser);
+  } catch (err) {
+    const { statusCode, message } = errorHandler(err);
+    res.status(statusCode).json(message);
   }
 };
 
 export const login = (req: Request, res: Response) => {
   try {
-    const user = req.body as User;
-    const { email, password } = user;
-    const existingUser: User = selectBy(DataBase.USERS, { email }, 'single');
-
+    const { email, password } = req.body as LoginUserData;
+    const existingUser = getUser(email);
     if (!existingUser) return res.status(404).json('User not found');
 
     const { password: dbUserPassword, ...rest } = existingUser;
     const isMatch = bcrypt.compareSync(password, dbUserPassword);
-
     if (!isMatch) return res.status(400).json("Wrong user name or password");
 
     const token = jwt.sign({ id: existingUser.id }, jwtToken);
-    res.cookie(COOKIE_NAME, token, { httpOnly: true, sameSite: 'none', secure: true }).status(200).json(rest);
-  } catch (err: unknown) {
-    res.status(500).json('Smtn went wrong...');
+    res.cookie(COOKIE_NAME, token, { httpOnly: true, sameSite: 'none', secure: true })
+      .status(200).json(rest);
+  } catch (err) {
+    const { statusCode, message } = errorHandler(err);
+    res.status(statusCode).json(message);
   }
 };
 
 export const logout = (req: Request, res: Response) => {
-  res.clearCookie(COOKIE_NAME, {
-    sameSite: 'none',
-    secure: true
-  }).status(200).json("Logged out");
+  try {
+    res.clearCookie(COOKIE_NAME, { sameSite: 'none', secure: true })
+      .status(200).json("Logged out");
+  } catch (err) {
+    const { statusCode, message } = errorHandler(err);
+    res.status(statusCode).json(message);
+  }
 };

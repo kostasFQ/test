@@ -27,15 +27,12 @@ function Header({ user }: { user: User | undefined }) {
     }
   }, [deleteStorageValue, get, setUser]);
 
-  if (!user) return null;
-
-
   return (
     <div className={styles.header}>
-      <span>{user.username}'s todo list</span>
+      {user && <span>{user.username}'s todo list</span>}
       <Button className={styles.logoutButton} onClick={onLogout}>Log out</Button>
     </div>
   )
-}
+};
 
 export default Header;

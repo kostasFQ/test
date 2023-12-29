@@ -1,10 +1,9 @@
-
-export type User = {
-  username: string;
+export type LoginUserData = {
   password: string;
   email: string;
-  id?: number
 }
+export type NewUser = LoginUserData & { username: string }
+export type User = NewUser & { id: number }
 
 export type NewTodo = {
   title: string;
@@ -15,3 +14,5 @@ export type Todo = NewTodo & {
   isDone: boolean,
   userId: number,
 }
+export type FormView = "register" | "login";
+export type SubmitData = LoginUserData | NewUser;

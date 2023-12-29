@@ -1,4 +1,5 @@
 import { AxiosError } from "axios";
+import { NewUser, SubmitData } from "types";
 
 export const getValuesFromFromData = <T>(form: HTMLFormElement): T => {
   const formData = new FormData(form);
@@ -13,5 +14,10 @@ export const errorParser = (error: unknown): string | undefined => {
       ? error.message
       : error.response?.data;
   };
+
   if (error instanceof Error) { return error.message };
+};
+
+export const isNewUserDataGuard = (data: SubmitData): data is NewUser => {
+  return (data as NewUser).username !== undefined
 };

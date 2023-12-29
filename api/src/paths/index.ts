@@ -3,16 +3,20 @@ const prefix = '/api';
 const appPaths = {
   auth: {
     root: `${prefix}/users`,
-    register: '/register',
-    login: `/login`,
-    logout: '/logout'
+    sub: {
+      register: '/register',
+      login: `/login`,
+      logout: '/logout'
+    }
   },
   todos: {
     root: `${prefix}/todos`,
-    get: '/',
-    post: '/',
-    put: '/:id',
-    delete: '/:id',
+    sub: {
+      get: '/',
+      post: '/',
+      put: '/:id',
+      delete: '/:id',
+    }
   }
 };
 
