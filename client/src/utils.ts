@@ -14,4 +14,4 @@ export const errorParser = (error: unknown): string | undefined => {
       : error.response?.data;
   };
   if (error instanceof Error) { return error.message };
-}
+};

@@ -17,9 +17,9 @@ function Header({ user }: { user: User | undefined }) {
 
   const onLogout = useCallback(async () => {
     try {
-      await get(apiRoutes.users.logout);
       setUser(undefined);
       deleteStorageValue(USER_STORAGE_KEY);
+      await get(apiRoutes.users.logout);
     } catch (e) {
       if (e instanceof AxiosError) {
         console.log(e.response?.data);
