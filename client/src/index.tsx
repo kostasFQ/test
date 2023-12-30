@@ -6,8 +6,8 @@ import { TodosContextProvider } from "storage/todosContext";
 import "./index.css";
 
 const root = ReactDOM.createRoot(
-  document.getElementById("root") as HTMLElement
-);
+  document.getElementById('root')!
+)
 
 root.render(
   <React.StrictMode>
@@ -17,4 +17,4 @@ root.render(
       </TodosContextProvider>
     </UserContextProvider>
   </React.StrictMode>
-);
+)
