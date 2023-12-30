@@ -3,7 +3,6 @@ import { useCallback } from "react";
 import Button from "./sharable/Button";
 import useApi from "hooks/useApi";
 import apiRoutes from "paths/api";
-import { AxiosError } from "axios";
 import { USER_STORAGE_KEY } from "consts";
 import { useLocalStorage } from "hooks/useLocalStorage";
 import { useUserContext } from "storage/userContext";
