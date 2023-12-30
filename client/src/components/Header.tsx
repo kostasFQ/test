@@ -9,6 +9,7 @@ import { useLocalStorage } from "hooks/useLocalStorage";
 import { useUserContext } from "storage/userContext";
 
 import styles from "./comonStyles.module.scss";
+import { errorParser } from "utils";
 
 function Header({ user }: { user: User | undefined }) {
   const { get } = useApi();
@@ -20,10 +21,9 @@ function Header({ user }: { user: User | undefined }) {
       setUser(undefined);
       deleteStorageValue(USER_STORAGE_KEY);
       await get(apiRoutes.users.logout);
-    } catch (e) {
-      if (e instanceof AxiosError) {
-        console.log(e.response?.data);
-      }
+    } catch (err) {
+      const errorMessage = errorParser(err);
+      console.log(errorMessage);
     }
   }, [deleteStorageValue, get, setUser]);
 

@@ -1,4 +1,4 @@
-import { SyntheticEvent } from "react";
+import { FormEvent } from "react";
 import { FormView, LoginUserData, NewUser, SubmitData } from "types";
 import { getValuesFromFromData, isNewUserDataGuard } from "utils";
 import Button from "components/sharable/Button";
@@ -22,9 +22,9 @@ const buttonTitleMap: Record<FormView, string> = {
 };
 
 function AuthForm({ viewType, error, onSubmit }: AuthFormProps) {
-  const onFormSubmit = async (e: SyntheticEvent) => {
+  const onFormSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const values = getValuesFromFromData<SubmitData>(e.target as HTMLFormElement);
+    const values = getValuesFromFromData<SubmitData>(e.currentTarget);
 
     isNewUserDataGuard(values)
       ? onSubmit(values as NewUser)

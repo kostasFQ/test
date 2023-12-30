@@ -1,8 +1,9 @@
-import { SyntheticEvent, useCallback } from "react";
+import { FormEvent, useCallback } from "react";
 import { getValuesFromFromData } from "utils";
 import { NewTodo } from "types";
 import Input from "components/sharable/Input";
 import Button from "components/sharable/Button";
+
 import styles from "./styles.module.scss"
 
 type TodoFormProps = {
@@ -10,9 +11,9 @@ type TodoFormProps = {
 }
 
 function TodoForm({ onSubmit }: TodoFormProps) {
-  const addTodo = useCallback((e: SyntheticEvent) => {
+  const addTodo = useCallback((e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const form = e.target as HTMLFormElement
+    const form = e.currentTarget;
     const newTodo = getValuesFromFromData<NewTodo>(form);
     onSubmit(newTodo);
     form.reset();
