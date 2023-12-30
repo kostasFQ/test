@@ -1,24 +1,24 @@
-import { FormEvent } from "react";
-import { FormView, LoginUserData, NewUser, SubmitData } from "types";
-import { getValuesFromFromData, isNewUserDataGuard } from "utils";
-import Button from "components/sharable/Button";
-import Input from "components/sharable/Input";
-import styles from "../comonStyles.module.scss";
+import { FormEvent } from 'react';
+import { FormView, SubmitData } from 'types';
+import { getValuesFromFromData } from 'utils';
+import Button from 'components/sharable/Button';
+import Input from 'components/sharable/Input';
+import styles from '../comonStyles.module.scss';
 
 type AuthFormProps = {
   viewType: FormView,
   error?: string,
-  onSubmit: (data: any) => void;
+  onSubmit: (data: SubmitData) => void;
 };
 
 const formTitleMap: Record<FormView, string> = {
-  register: "Registration",
-  login: "Login"
+  register: 'Registration',
+  login: 'Login'
 };
 
 const buttonTitleMap: Record<FormView, string> = {
-  register: "Register",
-  login: "Log in"
+  register: 'Register',
+  login: 'Log in'
 };
 
 function AuthForm({ viewType, error, onSubmit }: AuthFormProps) {
@@ -26,16 +26,14 @@ function AuthForm({ viewType, error, onSubmit }: AuthFormProps) {
     e.preventDefault();
     const values = getValuesFromFromData<SubmitData>(e.currentTarget);
 
-    isNewUserDataGuard(values)
-      ? onSubmit(values as NewUser)
-      : onSubmit(values as LoginUserData);
+    onSubmit(values);
   };
 
   return (
     <>
       <form onSubmit={onFormSubmit} className={styles.authForm}>
         <h2>{formTitleMap[viewType]}</h2>
-        {viewType === "register" && (
+        {viewType === 'register' && (
           <Input required name="username" />
         )}
         <Input required name="email" type="email" />
@@ -44,7 +42,7 @@ function AuthForm({ viewType, error, onSubmit }: AuthFormProps) {
         {error && <p className={styles.error}>{error}</p>}
       </form>
     </>
-  )
-};
+  );
+}
 
 export default AuthForm;

@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link } from 'react-router-dom';
 
 type AuthRedirectProps = {
   goToHref: string
@@ -14,7 +14,7 @@ function AuthRedirect({ goToHref, goToTitle, label }: AuthRedirectProps) {
         <Link to={goToHref}>{goToTitle}</Link>
       </sub>
     </>
-  )
-};
+  );
+}
 
 export default AuthRedirect;

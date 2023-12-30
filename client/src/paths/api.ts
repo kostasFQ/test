@@ -1,4 +1,4 @@
-import { API_PATH } from "consts";
+import { API_PATH } from 'consts';
 
 const apiRoutes = {
   users: {

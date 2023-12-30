@@ -1,17 +1,17 @@
-import { AxiosError } from "axios";
-import AuthForm from "components/forms/AuthForm";
-import useApi from "hooks/useApi";
-import apiRoutes from "paths/api";
-import appPaths from "paths/app";
-import { useCallback, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { LoginUserData, User } from "types";
-import { useLocalStorage } from "hooks/useLocalStorage";
-import { USER_STORAGE_KEY } from "consts";
-import { useUserContext } from "storage/userContext";
-import AuthRedirect from "components/AuthRedirect";
+import { AxiosError } from 'axios';
+import AuthForm from 'components/forms/AuthForm';
+import useApi from 'hooks/useApi';
+import apiRoutes from 'paths/api';
+import appPaths from 'paths/app';
+import { useCallback, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { LoginUserData, SubmitData, User } from 'types';
+import { useLocalStorage } from 'hooks/useLocalStorage';
+import { USER_STORAGE_KEY } from 'consts';
+import { useUserContext } from 'storage/userContext';
+import AuthRedirect from 'components/AuthRedirect';
 
-import styles from "./styles.module.scss";
+import styles from './styles.module.scss';
 
 function Login() {
   const [error, setError] = useState<string | undefined>(undefined);
@@ -20,7 +20,7 @@ function Login() {
   const { setStorageValue } = useLocalStorage();
   const navigate = useNavigate();
 
-  const onSubmit = useCallback(async (body: LoginUserData) => {
+  const onSubmit = useCallback(async (body: SubmitData) => {
     try {
       const user = await post<LoginUserData, User>(apiRoutes.users.login, body);
       setUser(user);
@@ -28,7 +28,7 @@ function Login() {
       navigate(appPaths.root);
     } catch (err) {
       if (err instanceof AxiosError) {
-        setError(err.response?.data)
+        setError(err.response?.data);
       }
     }
   }, [navigate, post, setStorageValue, setUser]);
@@ -38,7 +38,7 @@ function Login() {
       <AuthForm viewType='login' onSubmit={onSubmit} error={error} />
       <AuthRedirect goToHref={appPaths.register} goToTitle='Registration' label='New User?' />
     </div>
-  )
+  );
 }
 
 export default Login;

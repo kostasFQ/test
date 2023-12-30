@@ -1,14 +1,14 @@
-import { User } from "types";
-import { useCallback } from "react";
-import Button from "./sharable/Button";
-import useApi from "hooks/useApi";
-import apiRoutes from "paths/api";
-import { USER_STORAGE_KEY } from "consts";
-import { useLocalStorage } from "hooks/useLocalStorage";
-import { useUserContext } from "storage/userContext";
+import { User } from 'types';
+import { useCallback } from 'react';
+import Button from './sharable/Button';
+import useApi from 'hooks/useApi';
+import apiRoutes from 'paths/api';
+import { USER_STORAGE_KEY } from 'consts';
+import { useLocalStorage } from 'hooks/useLocalStorage';
+import { useUserContext } from 'storage/userContext';
 
-import styles from "./comonStyles.module.scss";
-import { errorParser } from "utils";
+import styles from './comonStyles.module.scss';
+import { errorParser } from 'utils';
 
 function Header({ user }: { user: User | undefined }) {
   const { get } = useApi();
@@ -28,10 +28,10 @@ function Header({ user }: { user: User | undefined }) {
 
   return (
     <div className={styles.header}>
-      {user && <span>{user.username}'s todo list</span>}
+      {user && <span>{user.username}&lsqo;s todo list</span>}
       <Button className={styles.logoutButton} onClick={onLogout}>Log out</Button>
     </div>
-  )
-};
+  );
+}
 
 export default Header;

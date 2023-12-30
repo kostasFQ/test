@@ -1,4 +1,4 @@
-import { Navigate } from "react-router-dom";
+import { Navigate } from 'react-router-dom';
 
 export type PrivatePageWrapperProps = {
   isAuthenticated: boolean;
@@ -10,4 +10,4 @@ export default function PrivatePageWrapper({ isAuthenticated, authenticationPath
   return isAuthenticated
     ? children
     : <Navigate to={{ pathname: authenticationPath }} />;
-};
+}

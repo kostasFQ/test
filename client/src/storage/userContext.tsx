@@ -1,5 +1,5 @@
-import React, { createContext, useContext, useState, ReactNode } from "react";
-import { User } from "types";
+import React, { createContext, useContext, useState, ReactNode } from 'react';
+import { User } from 'types';
 
 type UserContextType = {
   user: User | undefined;
@@ -22,7 +22,7 @@ const useUserContext = (): UserContextType => {
   const context = useContext(UserContext);
 
   if (!context) {
-    throw new Error("useUserContext must be used within a MyContextProvider");
+    throw new Error('useUserContext must be used within a MyContextProvider');
   }
 
   return context;

@@ -1,16 +1,16 @@
-import { useEffect } from "react";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { USER_STORAGE_KEY } from "consts";
-import { User } from "types";
-import appPaths from "paths/app";
-import Header from "components/Header";
-import PrivatePageWrapper from "components/PrivatePageWrapper";
-import { useUserContext } from "storage/userContext";
-import { useLocalStorage } from "hooks/useLocalStorage";
-import List from "pages/List";
-import Login from "pages/Login";
-import Register from "pages/Register";
-import NotFound from "pages/NotFound";
+import { useEffect } from 'react';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { USER_STORAGE_KEY } from 'consts';
+import { User } from 'types';
+import appPaths from 'paths/app';
+import Header from 'components/Header';
+import PrivatePageWrapper from 'components/PrivatePageWrapper';
+import { useUserContext } from 'storage/userContext';
+import { useLocalStorage } from 'hooks/useLocalStorage';
+import List from 'pages/List';
+import Login from 'pages/Login';
+import Register from 'pages/Register';
+import NotFound from 'pages/NotFound';
 
 function App() {
   const { getStorageValue } = useLocalStorage();
@@ -42,6 +42,6 @@ function App() {
       </Routes>
     </BrowserRouter>
   );
-};
+}
 
 export default App;

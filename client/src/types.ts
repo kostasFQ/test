@@ -14,5 +14,5 @@ export type Todo = NewTodo & {
   isDone: boolean,
   userId: number,
 }
-export type FormView = "register" | "login";
+export type FormView = 'register' | 'login';
 export type SubmitData = LoginUserData | NewUser;

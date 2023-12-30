@@ -1,9 +1,9 @@
-import React, { createContext, useContext, useState, ReactNode, useEffect, useCallback, useRef } from "react";
-import { NewTodo, Todo } from "types";
-import useApi from "hooks/useApi";
-import apiRoutes from "paths/api";
-import { errorParser } from "utils";
-import { useUserContext } from "./userContext";
+import React, { createContext, useContext, useState, ReactNode, useEffect, useCallback, useRef } from 'react';
+import { NewTodo, Todo } from 'types';
+import useApi from 'hooks/useApi';
+import apiRoutes from 'paths/api';
+import { errorParser } from 'utils';
+import { useUserContext } from './userContext';
 
 type TodosContextType = {
   todos: Todo[]
@@ -27,7 +27,7 @@ const TodosContextProvider: React.FC<{ children: ReactNode }> = ({ children }) =
       const todos = await get<Todo[]>(apiRoutes.todos.list);
       setTodos(todos);
     } catch (e) {
-      setError(errorParser(e))
+      setError(errorParser(e));
     }
   }, [get]);
 
@@ -36,7 +36,7 @@ const TodosContextProvider: React.FC<{ children: ReactNode }> = ({ children }) =
       const newTodo = await post<NewTodo, Todo>(apiRoutes.todos.list, { title });
       setTodos((todos) => [...todos, newTodo]);
     } catch (e) {
-      setError(errorParser(e))
+      setError(errorParser(e));
     }
   }, [post]);
 
@@ -47,9 +47,9 @@ const TodosContextProvider: React.FC<{ children: ReactNode }> = ({ children }) =
         const newTodos = [...prev];
         newTodos[index] = updatedTodo;
         return newTodos;
-      })
+      });
     } catch (e) {
-      setError(errorParser(e))
+      setError(errorParser(e));
     }
   }, [put]);
 
@@ -60,11 +60,11 @@ const TodosContextProvider: React.FC<{ children: ReactNode }> = ({ children }) =
         const newTodos = [...prev];
         newTodos.splice(index, 1);
         return newTodos;
-      })
+      });
     } catch (e) {
-      setError(errorParser(e))
+      setError(errorParser(e));
     }
-  }, [del])
+  }, [del]);
 
   useEffect(() => {
     if (user && !fetched.current) {
@@ -84,7 +84,7 @@ const useTodosContext = (): TodosContextType => {
   const context = useContext(TodosContext);
 
   if (!context) {
-    throw new Error("useTodosContext must be used within a MyContextProvider");
+    throw new Error('useTodosContext must be used within a MyContextProvider');
   }
 
   return context;
