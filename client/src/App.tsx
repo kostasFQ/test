@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { USER_STORAGE_KEY } from "consts";
+import { User } from "types";
 import appPaths from "paths/app";
 import Header from "components/Header";
 import PrivatePageWrapper from "components/PrivatePageWrapper";
@@ -14,7 +15,7 @@ import NotFound from "pages/NotFound";
 function App() {
   const { getStorageValue } = useLocalStorage();
   const { user, setUser } = useUserContext();
-  const storedUser = getStorageValue(USER_STORAGE_KEY);
+  const storedUser = getStorageValue<User>(USER_STORAGE_KEY);
   const isAuthenticated = !!user || !!storedUser;
 
   useEffect(() => {
